@@ -8,6 +8,8 @@ import sys
 if len(sys.argv) == 1:
     raise Exception("Bitte gib die Anzahl der Epochen an!")
 
+epochs = int(sys.argv[1])
+
 
 transform = transforms.Compose(
     [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
