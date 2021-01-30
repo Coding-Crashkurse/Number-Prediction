@@ -18,11 +18,8 @@ function resize(){
   ctx.canvas.height = 420;
 
 } 
-    
 
 let coord = {x:0 , y:0};  
-   
-
 let paint = false; 
 
 function getPosition(event){ 
