@@ -19,5 +19,5 @@ Dieses Projekt ist ein Projekt, das Deep Learning, Flask sowie ein Frontend mite
 
 ## Copyright & Acknowledgement
 
-Das Deep Learning Modell stammt aus dem Deep Learning Nanodegree von Udacity (https://github.com/udacity/deep-learning-v2-pytorch)
+Das Deep Learning Modell stammt aus dem Deep Learning Nanodegree von Udacity (https://github.com/udacity/deep-learning-v2-pytorch/blob/master/intro-to-pytorch/Part%203%20-%20Training%20Neural%20Networks%20(Exercises).ipynb)
 Den JS Code für die Canvas stammt von hier: https://www.geeksforgeeks.org/how-to-draw-graphics-using-canvas-in-html5/
