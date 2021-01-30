@@ -1,7 +1,3 @@
-
-// wait for the content of the window element 
-// to load, then performs the operations. 
-// This is considered best practice. 
 window.addEventListener('load', ()=>{ 
         
     resize(); // Resizes the canvas once the window loads 
@@ -13,34 +9,28 @@ window.addEventListener('load', ()=>{
     
 const canvas = document.querySelector('#canvas'); 
    
-// Context for the canvas for 2 dimensional operations 
+
 const ctx = canvas.getContext('2d'); 
       
-// Resizes the canvas to the available size of the window. 
+
 function resize(){ 
-  ctx.canvas.width = 10;
-  ctx.canvas.height = 10;
-  // ctx.canvas.width = window.innerWidth; 
-  // ctx.canvas.height = window.innerHeight; 
+  ctx.canvas.width = 420;
+  ctx.canvas.height = 420;
+
 } 
     
-// Stores the initial position of the cursor 
+
 let coord = {x:0 , y:0};  
    
-// This is the flag that we are going to use to  
-// trigger drawing 
+
 let paint = false; 
-    
-// Updates the coordianates of the cursor when  
-// an event e is triggered to the coordinates where  
-// the said event is triggered. 
+
 function getPosition(event){ 
   coord.x = event.clientX - canvas.offsetLeft; 
   coord.y = event.clientY - canvas.offsetTop; 
 } 
   
-// The following functions toggle the flag to start 
-// and stop drawing 
+
 function startPainting(event){ 
   paint = true; 
   getPosition(event); 
@@ -53,38 +43,29 @@ function sketch(event){
   if (!paint) return; 
   ctx.beginPath(); 
     
-  ctx.lineWidth = 5; 
-   
-  // Sets the end of the lines drawn 
-  // to a round shape. 
+  ctx.lineWidth = 20; 
   ctx.lineCap = 'round'; 
     
   ctx.strokeStyle = 'black'; 
       
-  // The cursor to start drawing 
-  // moves to this coordinate 
   ctx.moveTo(coord.x, coord.y); 
    
-  // The position of the cursor 
-  // gets updated as we move the 
-  // mouse around. 
   getPosition(event); 
    
-  // A line is traced from start 
-  // coordinate to this coordinate 
   ctx.lineTo(coord.x , coord.y); 
-    
-  // Draws the line. 
+
   ctx.stroke(); 
 } 
 
+const prediction = document.getElementById("prediction")
+
 document.getElementById("senddata").addEventListener("click", () => {
-    const elem = document.getElementById("canvas")
-    const result = canvas.getContext('2d').getImageData(0, 0, 10, 10)
+    const canvas = document.getElementById("canvas")
+    const result = canvas.getContext('2d').getImageData(0, 0, 420, 420)
     const resultarr = Array.from(result.data);
 
     const alpha_arr = []
-
+  
     for (let i = 0; i < resultarr.length; i = i + 4) {
       alpha_arr.push(resultarr[i+3])
     }
@@ -93,11 +74,19 @@ document.getElementById("senddata").addEventListener("click", () => {
        method: 'POST',
        body: JSON.stringify({
          alpha_arr: alpha_arr
-         
        })
-     }).then(function(data) {
-       console.log(data)
-     }).catch(function(error){
-       console.log(error)
-     });
+     }).then(response => response.json())
+     .then(response => {
+      prediction.innerHTML = `Du hast eine ${response.prediction} gemalt, da bin ich mir zu ${parseFloat(response.prob * 100).toFixed(4)}% sicher`
+         console.log(response)
+      prediction.classList.remove("hidden")
+      const context = canvas.getContext('2d');
+
+      setTimeout(function(){ context.clearRect(0, 0, 420, 420); }, 1500);
+      
+         
+     })
+    .catch(err => {
+      console.log(err);
+    });
 })

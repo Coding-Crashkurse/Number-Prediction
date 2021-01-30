@@ -5,30 +5,29 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content= 
             "width=device-width, initial-scale=1.0"> 
-      
+    <link rel="stylesheet" href="style.css">
     <title> 
         Draw with the mouse in a HTML5 canvas 
     </title> 
       
     <style> 
-        * { 
-            overflow: hidden; 
-        } 
-        body { 
-            text-align: center; 
-        } 
-        h1 { 
-            color: green; 
-        } 
+
     </style> 
 </head> 
   
 <body> 
-    <h1>GeeksforGeeks</h1> 
-    <b>Draw anything you want</b> 
-    <button id="senddata">Send Data</button>
-    <hr> 
-    <canvas id="canvas"></canvas> 
+    <div class="content">
+        <div class="inner">
+            <div class="intro">
+                <h2>Hallo. Ich bin Pepper, der Roboter, der Zahlen lesen kann</h2>
+                <p>Trage in das weiße Feld eine Zahl zwischen 0 und 9 ein und ich werde sie erkennen</p>
+            </div>
+            <canvas id="canvas"></canvas> 
+            <div class="btn" id="senddata">Predict!</div>
+            <div id="prediction" class="hidden">dfsdfsdfs</div>
+        </div>
+    </div>
+
     <script src="script.js"></script> 
 </body> 
   
